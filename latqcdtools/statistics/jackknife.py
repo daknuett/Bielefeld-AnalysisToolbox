@@ -12,6 +12,8 @@ from latqcdtools.statistics.statistics import std_mean, std_err, meanArgWrapper
 import latqcdtools.base.logger as logger
 from latqcdtools.base.speedify import DEFAULTTHREADS, parallel_function_eval
 
+from ..metadata import annotate_metadata
+
 
 def pseudo(mean, mean_i, numb_blocks):
     """ Calculate pseudo values of elements of objects that are not tuple. """
@@ -135,6 +137,7 @@ class nimbleJack:
             return self._mean, self._error
 
 
+@annotate_metadata("jackknife", algo_doi="10.1214/aos/1176345462")
 def jackknife(func, data, numb_blocks=20, conf_axis=1, return_sample=False, args=(), nproc=DEFAULTTHREADS):
     """Jackknife routine for arbitray functions. This routine creates the jackknife like blocked subsets of data and
     passes them to the function in the same format as in the input data. So the idea is to write a function that

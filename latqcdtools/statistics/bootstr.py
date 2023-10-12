@@ -13,6 +13,7 @@ from latqcdtools.statistics.statistics import meanArgWrapper, std_mean, std_dev,
 from latqcdtools.base.speedify import DEFAULTTHREADS, parallel_function_eval
 from latqcdtools.base.initialize import DEFAULTSEED
 
+from ..metadata import annotate_metadata
 
 def recurs_append(data, sample_data, axis, conf_axis, sample_size, same_rand_for_obs, i, my_seed):
     """ Recursive function to fill the sample. """
@@ -108,6 +109,7 @@ class nimbleBoot:
             return self._mean, self._error
 
 
+@annotate_metadata("bootstrap", algo_doi="http://www.jstor.org/stable/2958830")
 def bootstr(func, data, numb_samples, sample_size = 0, same_rand_for_obs = False, conf_axis = 1, return_sample = False,
             seed = None, err_by_dist = False, args=(), nproc=DEFAULTTHREADS):
     """Bootstrap for arbitrary functions. This routine resamples the data and passes them to the function in the same
